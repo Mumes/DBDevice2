@@ -5,20 +5,19 @@ using System.Text;
 
 namespace Data.Regimes.Actions
 {
-    class GyroActionImpulses: IBinaryAction<int[]> 
+    class GyroActionImpulses : IGyroAction
     {
-        
-        public int[] DoWork(byte[] reg, int start)
+        public double[] DoWork(byte[] reg, int start)
         {
-            int[] gyro = new int[3];
-            gyro[0] =BitConverter.ToInt16(reg, start);
-            gyro[1] = BitConverter.ToInt16(reg, start+2);
-            gyro[2] = BitConverter.ToInt16(reg, start+4);
+            double[] gyro = new double[3];
+            gyro[0] = BitConverter.ToInt16(reg, start);
+            gyro[1] = BitConverter.ToInt16(reg, start + 8);
+            gyro[2] = BitConverter.ToInt16(reg, start + 16);
             return gyro;
         }
     }
 
-    class GyroActionRadians : IBinaryAction<double[]>
+    class GyroActionRadians : IGyroAction
     {
 
         public double[] DoWork(byte[] reg, int start)
@@ -27,6 +26,19 @@ namespace Data.Regimes.Actions
             gyro[0] = BitConverter.ToDouble(reg, start);
             gyro[1] = BitConverter.ToDouble(reg, start + 8);
             gyro[2] = BitConverter.ToDouble(reg, start + 16);
+            return gyro;
+        }
+    }
+
+    class GyroActionRadiansSinglePrecision : IGyroAction
+    {
+
+        public double[] DoWork(byte[] reg, int start)
+        {
+            double[] gyro = new double[3];
+            gyro[0] = BitConverter.ToSingle(reg, start);
+            gyro[1] = BitConverter.ToSingle(reg, start + 4);
+            gyro[2] = BitConverter.ToSingle(reg, start + 8);
             return gyro;
         }
     }

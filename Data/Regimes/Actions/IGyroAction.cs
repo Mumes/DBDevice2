@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Data.Regimes.Actions
 {
-    interface IBinaryAction<T>
+    interface IGyroAction
     {
-       T DoWork(byte[] reg, int start);
+       double[] DoWork(byte[] reg, int start);
     }
 }

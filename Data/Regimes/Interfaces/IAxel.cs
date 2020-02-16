@@ -6,5 +6,6 @@ namespace Data.Regimes.Interfaces
 {
     interface IAxel
     {
+        double[] Axel { get; set; }
     }
 }

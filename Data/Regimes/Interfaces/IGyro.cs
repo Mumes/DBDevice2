@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Data.Regimes.Interfaces
 {
-    interface IGyro<T> 
+    interface IGyro 
     {
-        T[] Gyro { get;  set; }
+        double[] Gyro { get;  set; }
         //void GetGyro(int start, );
     }
 }
