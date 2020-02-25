@@ -1,5 +1,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Data.BinaryFiles;
+using System.Collections.Concurrent;
+using Data.Models;
+using System.Collections.Generic;
+using Data.Regimes;
+using System;
 
 namespace DataUnitTests
 {
@@ -17,14 +22,30 @@ namespace DataUnitTests
            
         }
 
+        List<IEnumerable<RegBase>> list;
+        BinaryDataFileModel q;
+        ReadDirectory readDirectory;
+        void FileAddedEvent(object s,EventArgs e)
+        {
+            readDirectory.bddm.BinaryDataDirectory.TryDequeue(out q);
+            RegFileFactory factory = new RegFileFactory(q.BinaryData);
+            list.Add(factory.Create());
+        }
+
         [TestMethod]
         public void TestReadDirectory()
         {
-
+           
+            list = new List<IEnumerable<RegBase>>();
             string path = @"H:\testBinaryFiles";
 
-            var readDirectory = new ReadDirectory();
-            var result = readDirectory.ReadFullDirectory(path).Result;
+            readDirectory = new ReadDirectory();
+            var r = readDirectory.ReadFullDirectory(path);
+            
+            readDirectory.FileAddEvent += FileAddedEvent;
+
+           var ff= r.Result;
+            
         }
 
     }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Data.Regimes.Actions
 {
-    class GyroActionImpulses : IGyroAction
+    public class GyroActionImpulses : IGyroAction
     {
         public double[] DoWork(byte[] reg, int start)
         {
@@ -17,7 +17,7 @@ namespace Data.Regimes.Actions
         }
     }
 
-    class GyroActionRadians : IGyroAction
+    public class GyroActionRadians : IGyroAction
     {
 
         public double[] DoWork(byte[] reg, int start)
@@ -30,7 +30,7 @@ namespace Data.Regimes.Actions
         }
     }
 
-    class GyroActionRadiansSinglePrecision : IGyroAction
+    public class GyroActionRadiansSinglePrecision : IGyroAction
     {
 
         public double[] DoWork(byte[] reg, int start)

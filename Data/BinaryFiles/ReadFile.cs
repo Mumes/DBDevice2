@@ -11,8 +11,6 @@ namespace Data.BinaryFiles
 {
     public class ReadFile
     {
-        public List<ConcurrentQueue<byte>> BinaryDataFiles;
-
         public static bool VerifyPath(String path)
         {
             if (string.IsNullOrEmpty(path))
@@ -37,7 +35,7 @@ namespace Data.BinaryFiles
                     queue = new byte[fs.Length];
                     var result = fs.Read(queue, 0, (int)fs.Length);
                 }
-                bdfm.BinaryData = new ConcurrentQueue<byte>(queue);
+                bdfm.BinaryData = new Queue<byte>(queue);
                 return bdfm;
             }
              );

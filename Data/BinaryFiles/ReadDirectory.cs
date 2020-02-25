@@ -9,8 +9,9 @@ namespace Data.BinaryFiles
 {
     public class ReadDirectory
     {
-        private static readonly BinaryDataDirectoryModel bddm;
-        static ReadDirectory()
+        public event EventHandler FileAddEvent;
+        public BinaryDataDirectoryModel bddm { get; set; }
+        public ReadDirectory()
         {
             bddm = new BinaryDataDirectoryModel();
         }
@@ -23,9 +24,10 @@ namespace Data.BinaryFiles
             {
                 foreach (var item in dir.GetFiles())
                 {
-                    bddm.BinaryDataDirectory.Add(
+                    bddm.BinaryDataDirectory.Enqueue(
                         await (new ReadFile().ReadFileAsync(item.FullName))
                         );
+                    FileAddEvent?.Invoke(this, EventArgs.Empty);
                 }
             }
             return bddm;            

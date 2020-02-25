@@ -10,11 +10,11 @@ namespace Data.Models
         public string FullPath { get; set; }
         public string Directory { get; set; }
 
-        public ConcurrentQueue<byte> BinaryData {get;set;}
+        public Queue<byte> BinaryData {get;set;}
 
         public BinaryDataFileModel()
         {
-            BinaryData = new ConcurrentQueue<byte>();
+            BinaryData = new Queue<byte>();
         }
     }
 }
